@@ -1,0 +1,97 @@
+SHORT EXPLANATION OF CODE MODIFICATIONS
+Ansum Sanal - Web Development Lab
+
+The provided demonstration page ("HTML Learning Lab") showed one example of each HTML
+element on a dark slate and cyan page. I kept its overall approach (one HTML file for
+content, a dark theme, in-page navigation) and rebuilt it as a personal portfolio.
+
+1. STRUCTURE (index.html)
+- Replaced the 14 generic demo sections with 5 purposeful ones: About, Skills, Projects,
+  Gallery and Contact, plus a header and footer.
+- Navigation links now match my sections. Each in-page link (href="#about", "#skills",
+  "#projects", "#gallery", "#contact", "#home") points to an element with the same id.
+  One external link (GitHub, opens in a new tab) was added.
+- Used semantic elements: header, nav, main, section, article, aside, figure/figcaption,
+  details/summary and footer. Added aria-labelledby on sections and a skip link.
+- Replaced the sample table of student marks with a table of my own lab work (with a
+  caption, column headers and row headers).
+- Replaced the long sample form (password, gender, file upload, etc.) with a short contact
+  form: text, email, select, textarea and a checkbox, each with a linked label. The
+  password field was removed on purpose.
+- Replaced the random placeholder image with three of my own screenshots (each with
+  descriptive alt text) and an SVG avatar. Removed the audio/video and iframe examples
+  because they relied on files or sites that were not part of my project.
+
+2. STYLE (style.css) - rules changed
+- Colours and fonts are now CSS variables on :root, which is what makes the light theme
+  possible: [data-theme="light"] only redefines the variables.
+- body: colourful background made of soft radial gradients (violet, pink, cyan, amber), serif
+  body text, and Archivo for headings.
+- header: now a full-width violet-to-pink gradient hero with a glass-style "title block"
+  (a grid of quick facts) and a gradient avatar ring.
+- nav: stays sticky, but is now a row of pill-shaped links; the current section is
+  highlighted with a gradient pill.
+- section: each section is now a coloured panel with its own accent colour (violet, cyan,
+  pink, amber, green), and a two-column layout (heading left, content right) that
+  collapses to one column on phones.
+- button, table, form controls, .demo-image and .card: gradient pill buttons, a gradient
+  table header, coloured card edges and tags, coloured image borders; images keep a fixed
+  aspect ratio.
+- footer: gradient bar matching the header.
+- Added visible :focus-visible outlines, hover states and prefers-reduced-motion handling.
+- Responsive: one breakpoint at 820px, auto-fit grids for cards and the gallery, and a
+  scrollable wrapper for the table on narrow screens.
+
+3. BEHAVIOUR (script.js, new file)
+- Gallery filter: each figure has data-category; the buttons set the `hidden` attribute
+  on figures that do not match and update a status line ("Showing 1 of 3 screenshots").
+- Theme toggle: switches data-theme on <html> and saves the choice in localStorage
+  (wrapped in try/catch in case storage is blocked).
+- Form validation: each field has a rule; on submit the page checks all fields, shows an
+  error under each invalid one, and moves focus to the first. If everything is valid it
+  shows a confirmation message and clears the form. event.preventDefault() is used
+  because there is no backend: the form does NOT save or send anything.
+- Navigation highlight: an IntersectionObserver marks the link for the section currently
+  in view with aria-current.
+
+4. TESTING DONE
+- Opened in a browser at desktop width and checked the layout. The page also has a media
+  query (max-width: 820px) that stacks the layout into one column on narrow screens; I did
+  not capture mobile screenshots.
+- Checked that every nav link jumps to its section and external links open in a new tab.
+- Tested the filter buttons, theme toggle, an empty form submit, an invalid email and a
+  valid submit.
+- Checked the browser console: no JavaScript errors.
+
+5. WHAT I LEARNED FROM THE ORIGINAL CODE
+- Document setup: <!DOCTYPE html> tells the browser to use modern HTML rules. <html lang="en">
+  is the root element and states the page language. <head> holds information about the page
+  (character set, viewport, title, description, CSS link) that is not shown directly. <body>
+  holds everything the visitor sees.
+- Viewport meta tag: without <meta name="viewport" content="width=device-width,
+  initial-scale=1.0"> a phone pretends to be a wide desktop screen and shrinks the page. With
+  it, the page uses the real screen width, so the responsive CSS works on phones.
+- CSS: the original used one <style> block with rules for body, .container, header, nav,
+  section, button, table, form controls, .demo-image, .card and footer. I moved these into
+  style.css and changed colours, fonts, spacing, layout, borders and hover/focus states. A
+  class (.card) can be reused on many elements; an id (#about) must be unique on a page.
+- Navigation: an in-page link such as href="#projects" jumps to the element with
+  id="projects" on the same page. An external URL such as https://github.com/... leaves the
+  page, so I open it in a new tab with target="_blank" and rel="noopener".
+- Semantic layout: header, nav, main, section, article, aside and footer describe the purpose
+  of each part of the page, which helps screen readers, search engines and anyone reading the
+  code. A plain <div> says nothing about its content.
+- Content elements: the original showed headings, paragraphs, strong/em, ordered, unordered
+  and description lists, images, a table, a form, details/summary, progress, meter, time and
+  address. I kept the ones that suit a portfolio (headings, lists, table, form, details,
+  article, aside, figure) and dropped the rest.
+- Forms: labels linked with for/id make fields clear and easier to click; input types (text,
+  email, checkbox) and the select and textarea give browsers and phones the right controls.
+  An HTML form on its own does not store anything on a server. Mine is a front-end
+  demonstration only and uses JavaScript to validate input.
+- Media and embedding: audio.mp3 and video.mp4 in the original were placeholder filenames
+  that did not exist, and some sites refuse to be embedded in an iframe, so I removed audio,
+  video and iframe from my version.
+- Accessibility: images have descriptive alt text, every form control has a label, links say
+  where they go, heading levels follow a logical order (h1, then h2, then h3), and there is a
+  skip link and visible keyboard focus.
