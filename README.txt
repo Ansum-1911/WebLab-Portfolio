@@ -55,4 +55,4 @@ SUBMISSION CONTENTS
     02_desktop_projects_table.png        project cards and the lab-work table
     03_desktop_contact_form_validation.png  contact form showing validation messages
   (Screenshots 02 and 03 are two cropped captures of the same section placed one below the other.)
-- Live URL: not published (hosting was not required).
+- Live URL:https://ansum-1911.github.io/WebLab-Portfolio/
